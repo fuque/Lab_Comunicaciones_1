@@ -1,0 +1,51 @@
+id: Modulador_PAM
+label: QT GUI ModuladorPAM
+category: '[Modulos_L1A_G6]'
+flags: need_qt_gui
+
+parameters:
+-   id: D
+    label: Ancho del pulso
+    dtype: int
+    default: '10'
+    hide: none
+-   id: Fs
+    label: Frecuencia al cuadrado
+    dtype: raw
+    default: '100000'
+    hide: none
+-   id: Samp_rate
+    label: Frecuencia de muestreo
+    dtype: raw
+    default: 100e3
+    hide: none
+-   id: gui_hint
+    label: GUI Hint
+    dtype: gui_hint
+    hide: part
+
+inputs:
+-   label: in
+    dtype: float
+    vlen: 1
+
+outputs:
+-   label: out
+    dtype: float
+    vlen: 1
+
+templates:
+    imports: 'from Modulador_PAM import Modulador_PAM  # grc-generated hier_block'
+    make: "Modulador_PAM(\n    D=${ D },\n    Fs=${ Fs },\n    Samp_rate=${ Samp_rate\
+        \ },\n)\n<% win = 'self.%s'%id %>\n${ gui_hint() % win }"
+    callbacks:
+    - set_D(${ D })
+    - set_Fs(${ Fs })
+    - set_Samp_rate(${ Samp_rate })
+
+documentation: 'L1A_G6
+
+    /media/labcom/ESD-USB/000) Comu_1/Lab5_Comu_I/Modulador_PAM.py'
+grc_source: /media/labcom/ESD-USB/000) Comu_1/Lab5_Comu_I/ModuladorPAM.grc
+
+file_format: 1
